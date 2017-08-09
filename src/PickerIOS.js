@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+    FlatList,
+    Modal,
+    Platform,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
+
+import Item from './Item';
 
 // IOS blue from https://developer.apple.com/ios/human-interface-guidelines/visual-design/color/
 const IOS_BLUE = '#007AFF';
@@ -9,23 +19,47 @@ const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
 
 const Props = {
     title: PropTypes.string.isRequired,
-    // eslint-disable-next-line react/no-unused-prop-types
-    data: PropTypes.arrayOf(
-        PropTypes.oneOfType([
-            PropTypes.object,
-            PropTypes.string
-        ])
-    ).isRequired,
     visible: PropTypes.bool.isRequired,
-    onCancel: PropTypes.func.isRequired
+    data: PropTypes.arrayOf(PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.string
+    ])).isRequired,
+    selectedValue: PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.string
+    ]).isRequired,
+    keyExtractor: PropTypes.func,
+    valueExtractor: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
+    onValueChange: PropTypes.func.isRequired
 };
 
-// eslint-disable-next-line react/prefer-stateless-function
+const DefaultProps = {
+    keyExtractor: item => item.id
+};
+
 class PickerIOS extends Component {
     static propTypes = Props;
 
+    static defaultProps = DefaultProps;
+
+    renderItem = ({ item }) => {
+        const { valueExtractor, onValueChange, selectedValue } = this.props;
+
+        return (
+            <Item
+                item={item}
+                selectedValue={selectedValue}
+                valueExtractor={valueExtractor}
+                onItemPress={onValueChange}
+            />
+        );
+    };
+
+    separatorComponent = () => <View style={{ height: 1, backgroundColor: '#DDD' }} />;
+
     render() {
-        const { title, visible, onCancel } = this.props;
+        const { title, visible, data, onCancel, keyExtractor } = this.props;
 
         return (
             <Modal
@@ -51,6 +85,13 @@ class PickerIOS extends Component {
                         }
                     </View>
                 </View>
+
+                <FlatList
+                    data={data}
+                    keyExtractor={keyExtractor}
+                    ItemSeparatorComponent={this.separatorComponent}
+                    renderItem={this.renderItem}
+                />
             </Modal>
         );
     }

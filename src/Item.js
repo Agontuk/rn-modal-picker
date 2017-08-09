@@ -1,56 +1,56 @@
-/**
- * @flow
- */
 import React, { PureComponent } from 'react';
-import { Text, TouchableOpacity, StyleSheet, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Octicons';
+import PropTypes from 'prop-types';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-type Props = {
-  item: Object,
-  labelKey: string,
-  valueKey: string,
-  selected: boolean,
-  onItemPress: Function
+const Props = {
+    item: PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.string
+    ]).isRequired,
+    selectedValue: PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.string
+    ]).isRequired,
+    valueExtractor: PropTypes.func.isRequired,
+    onItemPress: PropTypes.func.isRequired
 };
 
 class Item extends PureComponent {
-  props: Props
+    static propTypes = Props;
 
-  onItemPress = () => {
-    const { item, onItemPress, valueKey } = this.props;
-    onItemPress(item[valueKey]);
-  }
+    onItemPress = () => {
+        const { item, onItemPress } = this.props;
+        onItemPress(item);
+    };
 
-  render() {
-    const { item, labelKey, selected } = this.props;
+    render() {
+        const { item, valueExtractor, selectedValue } = this.props;
+        const itemValue = valueExtractor(item);
+        const selected = valueExtractor(selectedValue);
+        const active = itemValue === selected;
 
-    return (
-      <TouchableOpacity onPress={this.onItemPress}>
-        <View style={styles.container}>
-          <Text
-            style={{
-              color: selected ? '#3478f6' : 'black',
-              fontWeight: selected ? '600' : 'normal'
-            }}
-          >
-            {item[labelKey]}
-          </Text>
-
-          { selected && <Icon name='check' size={18} color='#3478f6' /> }
-        </View>
-      </TouchableOpacity>
-    );
-  }
+        return (
+            <TouchableOpacity onPress={this.onItemPress}>
+                <View style={styles.container}>
+                    <Text style={active ? styles.selected : {}}>{itemValue}</Text>
+                </View>
+            </TouchableOpacity>
+        );
+    }
 }
 
 export default Item;
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 16,
-    paddingHorizontal: 8,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  }
+    container: {
+        paddingVertical: 16,
+        paddingHorizontal: 16,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    selected: {
+        color: '#007AFF',
+        fontWeight: '600'
+    }
 });
