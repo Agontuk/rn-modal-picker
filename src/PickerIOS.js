@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-    FlatList,
     Modal,
     Platform,
     StyleSheet,
@@ -10,7 +9,7 @@ import {
     View
 } from 'react-native';
 
-import Item from './Item';
+import ItemList from './ItemList';
 
 // IOS blue from https://developer.apple.com/ios/human-interface-guidelines/visual-design/color/
 const IOS_BLUE = '#007AFF';
@@ -28,38 +27,17 @@ const Props = {
         PropTypes.object,
         PropTypes.string
     ]).isRequired,
-    keyExtractor: PropTypes.func,
     valueExtractor: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onValueChange: PropTypes.func.isRequired
 };
 
-const DefaultProps = {
-    keyExtractor: item => item.id
-};
-
+// eslint-disable-next-line react/prefer-stateless-function
 class PickerIOS extends Component {
     static propTypes = Props;
 
-    static defaultProps = DefaultProps;
-
-    renderItem = ({ item }) => {
-        const { valueExtractor, onValueChange, selectedValue } = this.props;
-
-        return (
-            <Item
-                item={item}
-                selectedValue={selectedValue}
-                valueExtractor={valueExtractor}
-                onItemPress={onValueChange}
-            />
-        );
-    };
-
-    separatorComponent = () => <View style={{ height: 1, backgroundColor: '#DDD' }} />;
-
     render() {
-        const { title, visible, data, onCancel, keyExtractor } = this.props;
+        const { title, visible, onCancel, ...props } = this.props;
 
         return (
             <Modal
@@ -86,12 +64,7 @@ class PickerIOS extends Component {
                     </View>
                 </View>
 
-                <FlatList
-                    data={data}
-                    keyExtractor={keyExtractor}
-                    ItemSeparatorComponent={this.separatorComponent}
-                    renderItem={this.renderItem}
-                />
+                <ItemList {...props} />
             </Modal>
         );
     }
