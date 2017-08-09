@@ -35,6 +35,9 @@
         // Allow .js & .jsx extension
         "react/jsx-filename-extension": ["error", {
             "extensions": [".js", ".jsx"]
-        }]
+        }],
+
+        // Enforce component methods order
+        "react/sort-comp": "off"
     }
 }
