@@ -1,30 +1,28 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Dimensions, Modal, StyleSheet, View } from 'react-native';
+import { Dimensions, Modal, StyleSheet, Text, View } from 'react-native';
 
-const Props = {
-    title: PropTypes.string.isRequired,
-    visible: PropTypes.bool.isRequired,
-    onCancel: PropTypes.func.isRequired
-};
+import ItemList from './ItemList';
+import { Props } from './Utils';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class PickerAndroid extends Component {
     static propTypes = Props;
 
     render() {
-        // eslint-disable-next-line no-unused-vars
-        const { title, visible, onCancel } = this.props;
+        const { title, visible, onCancel, ...props } = this.props;
 
         return (
             <Modal
                 animationType='fade'
-                transparent={false}
+                transparent
                 visible={visible}
                 onRequestClose={onCancel}
             >
                 <View style={styles.container}>
-                    <View style={styles.innerContainer} />
+                    <View style={styles.innerContainer}>
+                        <Text style={styles.title}>{title}</Text>
+                        <ItemList {...props} />
+                    </View>
                 </View>
             </Modal>
         );
@@ -42,7 +40,14 @@ const styles = StyleSheet.create({
     },
     innerContainer: {
         backgroundColor: 'white',
-        width: Dimensions.get('window').width * 0.75,
-        height: Dimensions.get('window').height * 0.75
+        width: Dimensions.get('window').width * 0.85,
+        maxHeight: Dimensions.get('window').height * 0.85
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: '600',
+        padding: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: '#999'
     }
 });
