@@ -1,0 +1,45 @@
+{
+  "name": "react-native-picker",
+  "version": "0.1.0",
+  "description": "A react-native picker for Android and iOS",
+  "main": "src/index.js",
+  "scripts": {
+    "precommit": "lint-staged"
+  },
+  "keywords": [
+    "react-native",
+    "react",
+    "native",
+    "picker",
+    "android",
+    "ios"
+  ],
+  "author": {
+    "name": "Iftekhar Rifat",
+    "email": "rifat662@gmail.com",
+    "url": "https://github.com/Agontuk"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Agontuk/react-native-picker",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Agontuk/react-native-picker"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.4.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.3",
+    "react": ">=15.0.0",
+    "react-native": ">=0.24.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint",
+      "git add"
+    ]
+  }
+}
