@@ -19,7 +19,7 @@ const Props = {
   onCancel: PropTypes.func.isRequired
 };
 
-class Picker extends Component {
+class PickerIOS extends Component {
   static propTypes = Props;
 
   render() {
@@ -54,7 +54,7 @@ class Picker extends Component {
   }
 }
 
-export default Picker;
+export default PickerIOS;
 
 const styles = StyleSheet.create({
   container: {

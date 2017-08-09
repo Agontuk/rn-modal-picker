@@ -8,7 +8,7 @@ const Props = {
   onCancel: PropTypes.func.isRequired
 };
 
-class Picker extends Component {
+class PickerAndroid extends Component {
   static propTypes = Props;
 
   render() {
@@ -30,7 +30,7 @@ class Picker extends Component {
   }
 }
 
-export default Picker;
+export default PickerAndroid;
 
 const styles = StyleSheet.create({
   container: {
