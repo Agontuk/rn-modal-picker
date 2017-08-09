@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import {
     Modal,
     Platform,
@@ -10,27 +9,12 @@ import {
 } from 'react-native';
 
 import ItemList from './ItemList';
+import { Props } from './Utils';
 
 // IOS blue from https://developer.apple.com/ios/human-interface-guidelines/visual-design/color/
 const IOS_BLUE = '#007AFF';
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
-
-const Props = {
-    title: PropTypes.string.isRequired,
-    visible: PropTypes.bool.isRequired,
-    data: PropTypes.arrayOf(PropTypes.oneOfType([
-        PropTypes.object,
-        PropTypes.string
-    ])).isRequired,
-    selectedValue: PropTypes.oneOfType([
-        PropTypes.object,
-        PropTypes.string
-    ]).isRequired,
-    valueExtractor: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired,
-    onValueChange: PropTypes.func.isRequired
-};
 
 // eslint-disable-next-line react/prefer-stateless-function
 class PickerIOS extends Component {
