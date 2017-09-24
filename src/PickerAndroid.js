@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         padding: 16,
         borderBottomWidth: 1,
-        borderBottomColor: '#999'
+        borderBottomColor: '#CCC'
     }
 });

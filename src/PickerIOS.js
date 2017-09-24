@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         position: 'absolute'
     },
     title: {
-        fontSize: 18,
+        fontSize: 17,
         fontWeight: '600'
     },
     cancelContainer: {
@@ -102,10 +102,10 @@ const styles = StyleSheet.create({
     },
     cancel: {
         color: IOS_BLUE,
-        fontSize: 18
+        fontSize: 17
     },
     done: {
         color: IOS_BLUE,
-        fontSize: 18
+        fontSize: 17
     }
 });

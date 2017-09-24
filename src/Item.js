@@ -30,7 +30,7 @@ class Item extends PureComponent {
         const active = itemValue === selected;
 
         return (
-            <TouchableOpacity onPress={this.onItemPress}>
+            <TouchableOpacity activeOpacity={0.5} onPress={this.onItemPress}>
                 <View style={styles.container}>
                     <Text style={active ? styles.selected : {}}>{itemValue}</Text>
                 </View>
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     selected: {
-        color: '#007AFF',
-        fontWeight: '600'
+        color: '#007AFF'
     }
 });

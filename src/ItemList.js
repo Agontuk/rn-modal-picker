@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 
 import Item from './Item';
 
@@ -40,7 +40,7 @@ class ItemList extends Component {
         );
     };
 
-    separatorComponent = () => <View style={{ height: 1, backgroundColor: '#DDD' }} />;
+    separatorComponent = () => <View style={styles.separator} />;
 
     render() {
         const { data, keyExtractor } = this.props;
@@ -57,3 +57,10 @@ class ItemList extends Component {
 }
 
 export default ItemList;
+
+const styles = StyleSheet.create({
+    separator: {
+        borderWidth: StyleSheet.hairlineWidth,
+        borderColor: '#EEEEEE'
+    }
+});
