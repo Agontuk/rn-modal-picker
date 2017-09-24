@@ -14,7 +14,7 @@ const Props = {
         PropTypes.string
     ]).isRequired,
     keyExtractor: PropTypes.func,
-    valueExtractor: PropTypes.func.isRequired,
+    labelExtractor: PropTypes.func.isRequired,
     onValueChange: PropTypes.func.isRequired
 };
 
@@ -28,13 +28,13 @@ class ItemList extends Component {
     static defaultProps = DefaultProps;
 
     renderItem = ({ item }) => {
-        const { valueExtractor, onValueChange, selectedValue } = this.props;
+        const { labelExtractor, onValueChange, selectedValue } = this.props;
 
         return (
             <Item
                 item={item}
                 selectedValue={selectedValue}
-                valueExtractor={valueExtractor}
+                labelExtractor={labelExtractor}
                 onItemPress={onValueChange}
             />
         );

@@ -11,7 +11,7 @@ const Props = {
         PropTypes.object,
         PropTypes.string
     ]).isRequired,
-    valueExtractor: PropTypes.func.isRequired,
+    labelExtractor: PropTypes.func.isRequired,
     onItemPress: PropTypes.func.isRequired
 };
 
@@ -24,9 +24,9 @@ class Item extends PureComponent {
     };
 
     render() {
-        const { item, valueExtractor, selectedValue } = this.props;
-        const itemValue = valueExtractor(item);
-        const selected = valueExtractor(selectedValue);
+        const { item, labelExtractor, selectedValue } = this.props;
+        const itemValue = labelExtractor(item);
+        const selected = labelExtractor(selectedValue);
         const active = itemValue === selected;
 
         return (

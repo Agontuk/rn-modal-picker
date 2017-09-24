@@ -12,7 +12,7 @@ export const Props = {
         PropTypes.object,
         PropTypes.string
     ]).isRequired,
-    valueExtractor: PropTypes.func.isRequired,
+    labelExtractor: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onValueChange: PropTypes.func.isRequired
 };
